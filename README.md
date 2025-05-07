@@ -20,14 +20,6 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 ---
 
-## ✨ Key Features
-
-- **Inter-Resolution Curriculum**: Trains progressively from 12px to 32px resolution
-- **Distillation Framework**: DeiT-style teacher-student KD using distillation tokens
-- **Saliency Supervision**: Aligns teacher-student attention via MSE loss on attention maps
-- **Patch Size Ablation**: Detailed analysis of patch sizes (2×2 vs. 4×4)
-
----
 
 
 ## 🚀 Getting Started
@@ -45,53 +37,5 @@ cd IRKD
 - **Curriculum Learning**: Resolution-based curriculum (12px → 32px)
 - **Patch Size Analysis**: Experiments with different patch sizes (2 and 4)
 
-### Model Architecture
 
-The implementation includes:
-- Teacher Model: DeiT (Data-efficient image Transformers)
-- Student Model: Custom ViT with distillation token
-- Saliency Distiller: Feature-level distillation using attention maps
 
-### Training Process
-
-1. Teacher Model Training
-   - Pre-trained on full resolution
-   - Used as knowledge source for student
-
-2. Student Model Training
-   - Progressive resolution training (12px → 32px)
-   - Knowledge distillation from teacher
-   - Saliency-aware feature matching
-   - Combined loss: CE + KD + Saliency
-
-## Requirements
-
-- PyTorch
-- Transformers (Hugging Face)
-- torchvision
-- tqdm
-- numpy
-- matplotlib
-
-## Getting Started
-
-1. Clone this repository
-2. Install dependencies
-3. Follow the notebooks in sequence:
-   - Start with `Experiment_1a.ipynb` for basic implementation
-   - Move to `Experiment_1b.ipynb` for saliency-based distillation
-   - Use `Saliency_patch_size2.ipynb` for patch size analysis
-
-## Citation
-
-If you use this code in your research, please cite:
-
-(To be added)
-
-## License
-
-(To be added)
-
-## Contact
-
-(To be added)
