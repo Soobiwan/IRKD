@@ -29,24 +29,6 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 ---
 
-## 🧪 Experimental Summary
-
-| Model         | Patch Size | Training Setup              | Accuracy (%) |
-|---------------|------------|-----------------------------|--------------|
-| Custom ViT    | 4          | Fixed CE                    | 66.85        |
-|               |            | Curriculum Learning (CL)    | 74.89        |
-|               |            | KD                          | 76.70        |
-|               |            | KD + CL                     | 77.12        |
-|               |            | KD + CL + Saliency          | 78.72        |
-| ViT-Tiny      | 2          | KD                          | 82.28        |
-|               |            | KD + CL                     | 79.92        |
-|               |            | KD + CL + Saliency          | 81.67        |
-| ViT-Tiny      | 4          | CL                          | 79.67        |
-|               |            | KD + CL                     | 83.29        |
-|               |            | KD + CL + Saliency          | 84.29        |
-| **Teacher**   | –          | ViT-Small (KD source)       | **86.00**    |
-
----
 
 ## 🚀 Getting Started
 
