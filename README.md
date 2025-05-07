@@ -33,15 +33,17 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 3. **Saliency-Aware Supervision**  
    We extract gradient-based attention maps (saliency) from selected layers of both teacher and student, and add an MSE loss on their spatial “heatmaps.” This guides the student’s focus toward the same informative regions the teacher uses.
 
-### Key Results
+### Results Overview
 
-| Model / Regime                    | PS=2 Student | PS=4 Student | Teacher (ViT-Small) |
-|-----------------------------------|--------------|--------------|----------------------|
-| **CE only**                       | 66.9%        | 74.0%        | —                    |
-| **+ Curriculum Learning**         | 74.9%        | 79.7%        | —                    |
-| **+ KD**                          | 76.7%        | 81.4%        | 82.9%                |
-| **+ KD + Curriculum**             | 77.1%        | 83.3%        | 82.9%                |
-| **+ KD + CL + Saliency Maps**     | 78.7%        | 84.3%        | 82.9%                |
+| Experiment Setup               | Custom Student (PS=2) | ViT Tiny-S (PS=2) | ViT Tiny-S (PS=4) |
+|--------------------------------|-----------------------|-------------------|-------------------|
+| Fixed-Resolution (CE Only)     | 66.85                 | –                 | 74.00             |
+| CL                             | 74.89                 | –                 | 79.67             |
+| KD                             | 76.70                 | 82.28             | 81.35             |
+| KD + CL                        | 77.12                 | 79.92             | 83.29             |
+| **KD + CL + Saliency Maps**    | **78.72**             | **81.67**         | **84.29**         |
+| Teacher Model (ViT-Small)      | 82.95                 | 82.95             | 86.00             |
+
 
 - A **5 M-param ViT-Tiny (PS=2)** student jumps from **64% → 71.5%** under CL and reaches **81.7%** with full IRKD.  
 - A **0.6 M-param custom student (PS=2)** sees similar gains: **66.9% → 74.9%** (CL) → **78.7%** (IRKD).  
