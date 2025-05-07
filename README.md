@@ -18,11 +18,16 @@ This repository contains the implementation and experiments for IRKD (Inter-Reso
   - Uses attention-based saliency maps
   - Includes additional loss terms for saliency matching
 
-- `Saliency_patch_size2.ipynb`: Experiments with smaller patch sizes
+- `Saliency_patch_size2.ipynb`: Experiments with patch size 2
   - Focuses on analyzing the impact of patch size on model performance
   - Implements patch size 2 for finer-grained feature extraction
   - Includes saliency analysis and visualization
   - Contains ablation studies on patch size effects
+ 
+- `SMALL_P_4_ALL`: Experiments with patch size 4
+- `kdonl`: KD only on patch size 2 for student ViT Tiny
+
+
 
 ### Key Features
 
