@@ -49,11 +49,9 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 - A **0.6 M-param custom student (PS=2)** sees similar gains: **66.9% → 74.9%** (CL) → **78.7%** (IRKD).  
 - The 4×4-patch variant (PS=4) consistently outperforms PS=2 on CIFAR-10, highlighting the patch-size vs. noise trade-off on small images.
 
-### Why It Matters
 
 - **Efficiency**: Early stages use tiny inputs, drastically reducing compute and memory needs.  
-- **Robustness**: Curriculum plus saliency enforces a structured, spatially aware learning path.  
-- **Simplicity**: All components (CL, KD, saliency) plug into standard training loops with minimal overhead.
+- **Robustness**: Curriculum plus saliency enforces a structured, spatially aware learning path. 
 
 For full details—including architecture diagrams, training schedules, and qualitative saliency visualizations—see our full paper.
 
