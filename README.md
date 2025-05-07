@@ -1,33 +1,59 @@
-# IRKD: Knowledge Distilled Vision Transformer with Inter-Resolution Training
+# IRKD: Knowledge-Distilled Vision Transformer via Inter-Resolution Training
 
-This repository contains the implementation and experiments for IRKD (Inter-Resolution Knowledge Distillation), a novel approach to knowledge distillation for Vision Transformers that leverages multi-resolution training strategies.
+This repository contains the official implementation for **IRKD (Inter-Resolution Knowledge Distillation)**—a novel approach that combines Curriculum Learning (CL), Knowledge Distillation (KD), and Saliency-based Supervision to train compact Vision Transformers more efficiently.
 
-## Project Structure
+## 🔍 Overview
 
-### Core Implementation Files
+IRKD progressively trains a student Vision Transformer with increasing input resolution, enabling the model to learn coarse-to-fine representations. Alongside, it distills knowledge from a powerful teacher model using attention-based saliency maps to guide spatial focus.
 
-- `Experiment_1a.ipynb`: Initial implementation of IRKD with basic knowledge distillation
-  - Contains the base ViTWithDistillation model implementation
-  - Implements curriculum learning with progressive resolution training
-  - Includes teacher-student training pipeline
-  - Uses patch size 4 for student model
+---
 
-- `Experiment_1b.ipynb`: Enhanced implementation with saliency-based distillation
-  - Extends Experiment_1a with saliency-aware distillation
-  - Implements SaliencyDistiller class for feature-level distillation
-  - Uses attention-based saliency maps
-  - Includes additional loss terms for saliency matching
+## 📁 Project Structure
 
-- `Saliency_patch_size2.ipynb`: Experiments with patch size 2
-  - Focuses on analyzing the impact of patch size on model performance
-  - Implements patch size 2 for finer-grained feature extraction
-  - Includes saliency analysis and visualization
-  - Contains ablation studies on patch size effects
- 
-- `SMALL_P_4_ALL`: Experiments with patch size 4
-- `kdonl`: KD only on patch size 2 for student ViT Tiny
+| File/Folder                | Description |
+|---------------------------|-------------|
+| `Experiment_1a.ipynb`     | Baseline ViT with KD and Curriculum Learning (CL); patch size = 4 |
+| `Experiment_1b.ipynb`     | Adds saliency-based supervision on top of KD + CL |
+| `Saliency_patch_size2.ipynb` | Full IRKD pipeline using patch size = 2 for finer spatial features |
+| `SMALL_P_4_ALL`           | Experiments using ViT-Tiny with patch size = 4 |
+| `kdonl`                   | KD-only experiments using patch size = 2 (no CL or saliency) |
 
+---
 
+## ✨ Key Features
+
+- **Inter-Resolution Curriculum**: Trains progressively from 12px to 32px resolution
+- **Distillation Framework**: DeiT-style teacher-student KD using distillation tokens
+- **Saliency Supervision**: Aligns teacher-student attention via MSE loss on attention maps
+- **Patch Size Ablation**: Detailed analysis of patch sizes (2×2 vs. 4×4)
+
+---
+
+## 🧪 Experimental Summary
+
+| Model         | Patch Size | Training Setup              | Accuracy (%) |
+|---------------|------------|-----------------------------|--------------|
+| Custom ViT    | 4          | Fixed CE                    | 66.85        |
+|               |            | Curriculum Learning (CL)    | 74.89        |
+|               |            | KD                          | 76.70        |
+|               |            | KD + CL                     | 77.12        |
+|               |            | KD + CL + Saliency          | 78.72        |
+| ViT-Tiny      | 2          | KD                          | 82.28        |
+|               |            | KD + CL                     | 79.92        |
+|               |            | KD + CL + Saliency          | 81.67        |
+| ViT-Tiny      | 4          | CL                          | 79.67        |
+|               |            | KD + CL                     | 83.29        |
+|               |            | KD + CL + Saliency          | 84.29        |
+| **Teacher**   | –          | ViT-Small (KD source)       | **86.00**    |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/salman192003/IRKD.git
+cd IRKD
 
 ### Key Features
 
