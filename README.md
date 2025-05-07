@@ -20,6 +20,40 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 ---
 
+## 📖 Paper Overview
+
+**IRKD** (Inter-Resolution Knowledge Distillation) is a unified training framework for compact Vision Transformers that combines:
+
+1. **Curriculum Learning (CL)**  
+   We feed the student progressively larger inputs—12×12 → 16×16 → … → 32×32—so it first masters coarse, low-frequency features before refining high-frequency details. This resolution curriculum acts as an implicit regularizer, speeding early convergence and reducing overfitting.
+
+2. **Knowledge Distillation (KD)**  
+   A high-capacity ViT-Small teacher (trained from scratch at 32×32 with the same patch size) provides soft logits through a dedicated distillation token. By matching its outputs, the student inherits rich, pre-learned representations, closing most of the accuracy gap despite its much smaller size.
+
+3. **Saliency-Aware Supervision**  
+   We extract gradient-based attention maps (saliency) from selected layers of both teacher and student, and add an MSE loss on their spatial “heatmaps.” This guides the student’s focus toward the same informative regions the teacher uses.
+
+### Key Results
+
+| Model / Regime                    | PS=2 Student | PS=4 Student | Teacher (ViT-Small) |
+|-----------------------------------|--------------|--------------|----------------------|
+| **CE only**                       | 66.9%        | 74.0%        | —                    |
+| **+ Curriculum Learning**         | 74.9%        | 79.7%        | —                    |
+| **+ KD**                          | 76.7%        | 81.4%        | 82.9%                |
+| **+ KD + Curriculum**             | 77.1%        | 83.3%        | 82.9%                |
+| **+ KD + CL + Saliency Maps**     | 78.7%        | 84.3%        | 82.9%                |
+
+- A **5 M-param ViT-Tiny (PS=2)** student jumps from **64% → 71.5%** under CL and reaches **81.7%** with full IRKD.  
+- A **0.6 M-param custom student (PS=2)** sees similar gains: **66.9% → 74.9%** (CL) → **78.7%** (IRKD).  
+- The 4×4-patch variant (PS=4) consistently outperforms PS=2 on CIFAR-10, highlighting the patch-size vs. noise trade-off on small images.
+
+### Why It Matters
+
+- **Efficiency**: Early stages use tiny inputs, drastically reducing compute and memory needs.  
+- **Robustness**: Curriculum plus saliency enforces a structured, spatially aware learning path.  
+- **Simplicity**: All components (CL, KD, saliency) plug into standard training loops with minimal overhead.
+
+For full details—including architecture diagrams, training schedules, and qualitative saliency visualizations—see our full paper.
 
 
 ## 🚀 Getting Started
