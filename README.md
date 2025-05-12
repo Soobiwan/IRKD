@@ -15,7 +15,7 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 | File/Folder                | Description |
 |---------------------------|-------------|
 | `IRKD PAPER`     | IRKD: Knowledge-Distilled Vision Transformer via Inter-Resolution Training Research Paper |
-| `Pipeline.png`                   | ViT Tiny Student using Patch Size 4 (Experiment 2.1-2.4) |
+| `Pipeline.png`                   | Project Pipeline |
 | `P2_OUR_MODEL.ipynb`     | Custom Model using Patch Size 2 (Experiment 1.1-1.3) |
 | `P2_OUR_MODEL_SAL_MAP.ipynb` | Custom Model using Patch Size 2 (Experiment 1.4) |
 | `P2_KD_only`           | ViT Tiny Student using Patch Size 2 (KD) (Experiment 2.2) |
