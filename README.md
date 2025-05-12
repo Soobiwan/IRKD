@@ -11,8 +11,6 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 ## 📁 Project Structure
 
-## 📁 Project Structure
-
 | File/Folder                | Description |
 |---------------------------|-------------|
 | `IRKD PAPER`     | IRKD: Knowledge-Distilled Vision Transformer via Inter-Resolution Training Research Paper |
