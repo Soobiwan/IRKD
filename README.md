@@ -10,15 +10,23 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 ## 📁 Project Structure
 
+## 📁 Project Structure
+
 | File/Folder                | Description |
 |---------------------------|-------------|
-| `Experiment_1a.ipynb`     | Baseline ViT with KD and Curriculum Learning (CL); patch size = 4 |
-| `Experiment_1b.ipynb`     | Adds saliency-based supervision on top of KD + CL |
-| `Saliency_patch_size2.ipynb` | Full IRKD pipeline using patch size = 2 for finer spatial features |
-| `SMALL_P_4_ALL`           | Experiments using ViT-Tiny with patch size = 4 |
-| `kdonl`                   | KD-only experiments using patch size = 2 (no CL or saliency) |
+| `IRKD PAPER`     | IRKD: Knowledge-Distilled Vision Transformer via Inter-Resolution Training Research Paper |
+| `Pipeline.png`                   | ViT Tiny Student using Patch Size 4 (Experiment 2.1-2.4) |
+| `P2_OUR_MODEL.ipynb`     | Custom Model using Patch Size 2 (Experiment 1.1-1.3) |
+| `P2_OUR_MODEL_SAL_MAP.ipynb` | Custom Model using Patch Size 2 (Experiment 1.4) |
+| `P2_KD_only`           | ViT Tiny Student using Patch Size 2 (KD) (Experiment 2.2) |
+| `P2_KD_CL`           | ViT Tiny Student using Patch Size 2 (KD+CL) (Experiment 2.3) |
+| `P2_KD_CL`           | ViT Tiny Student using Patch Size 2 (KD+CL+SL) (Experiment 2.4) |
+| `P_4_ALL`                   | ViT Tiny Student using Patch Size 4 (Experiment 2.1-2.4) |
+
 
 ---
+
+
 
 ## 📖 Paper Overview
 
@@ -32,26 +40,7 @@ IRKD progressively trains a student Vision Transformer with increasing input res
 
 3. **Saliency-Aware Supervision**  
    We extract gradient-based attention maps (saliency) from selected layers of both teacher and student, and add an MSE loss on their spatial “heatmaps.” This guides the student’s focus toward the same informative regions the teacher uses.
-
-### Results Overview
-
-| Experiment Setup               | Custom Student (PS=2) | ViT Tiny-S (PS=2) | ViT Tiny-S (PS=4) |
-|--------------------------------|-----------------------|-------------------|-------------------|
-| Fixed-Resolution (CE Only)     | 66.85                 | –                 | 74.00             |
-| CL                             | 74.89                 | –                 | 79.67             |
-| KD                             | 76.70                 | 82.28             | 81.35             |
-| KD + CL                        | 77.12                 | 79.92             | 83.29             |
-| **KD + CL + Saliency Maps**    | **78.72**             | **81.67**         | **84.29**         |
-| Teacher Model (ViT-Small)      | 82.95                 | 82.95             | 86.00             |
-
-
-- A **5 M-param ViT-Tiny (PS=2)** student jumps from **64% → 71.5%** under CL and reaches **81.7%** with full IRKD.  
-- A **0.6 M-param custom student (PS=2)** sees similar gains: **66.9% → 74.9%** (CL) → **78.7%** (IRKD).  
-- The 4×4-patch variant (PS=4) consistently outperforms PS=2 on CIFAR-10, highlighting the patch-size vs. noise trade-off on small images.
-
-
-- **Efficiency**: Early stages use tiny inputs, drastically reducing compute and memory needs.  
-- **Robustness**: Curriculum plus saliency enforces a structured, spatially aware learning path. 
+ng path. 
 
 For full details—including architecture diagrams, training schedules, and qualitative saliency visualizations—see our full paper.
 
@@ -62,14 +51,3 @@ For full details—including architecture diagrams, training schedules, and qual
 ```bash
 git clone https://github.com/salman192003/IRKD.git
 cd IRKD
-
-### Key Features
-
-- **Inter-Resolution Training**: Progressive training from low to high resolutions
-- **Knowledge Distillation**: Teacher-student framework with distillation tokens
-- **Saliency-Aware Distillation**: Feature-level distillation using attention maps
-- **Curriculum Learning**: Resolution-based curriculum (12px → 32px)
-- **Patch Size Analysis**: Experiments with different patch sizes (2 and 4)
-
-
-
