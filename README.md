@@ -6,6 +6,7 @@ This repository contains the official implementation for **IRKD (Inter-Resolutio
 
 IRKD progressively trains a student Vision Transformer with increasing input resolution, enabling the model to learn coarse-to-fine representations. Alongside, it distills knowledge from a powerful teacher model using attention-based saliency maps to guide spatial focus.
 
+![Pipeline Diagram](Pipeline.png)
 ---
 
 ## 📁 Project Structure
